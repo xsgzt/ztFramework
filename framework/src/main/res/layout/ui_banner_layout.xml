@@ -17,7 +17,8 @@
         android:layout_alignParentBottom="true"
         android:background="#22222222"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="12dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/banner_desc_tv"

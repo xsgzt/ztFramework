@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -34,6 +35,7 @@ public class BannerView extends RelativeLayout {
     private float mWidthProportion = 2;
     private float mHeightProportion = 1;
     private int mCurrentPosition = 0;
+    private RelativeLayout mReindcation;
 
 
     public BannerView(Context context) {
@@ -102,8 +104,8 @@ public class BannerView extends RelativeLayout {
         mBannerVp = (BannerViewPage) findViewById(R.id.banner_vp);
         mBannerDescTv = (TextView) findViewById(R.id.banner_desc_tv);
         mDotContainerView = (LinearLayout) findViewById(R.id.dot_container);
-        RelativeLayout Reindcation = (RelativeLayout) findViewById(R.id.re_indcation);
-        Reindcation.setBackgroundColor(mBottomColor);
+        mReindcation = (RelativeLayout) findViewById(R.id.re_indcation);
+        mReindcation.setBackgroundColor(mBottomColor);
     }
 
     /**
@@ -134,7 +136,11 @@ public class BannerView extends RelativeLayout {
         });
         // 6.初始化的时候获取第一条的描述
         String firstDesc = mAdapter.getBannerDesc(0);
-        mBannerDescTv.setText(firstDesc);
+        if (firstDesc != null) {
+            mReindcation.setVisibility(VISIBLE);
+            mBannerDescTv.setText(firstDesc);
+        }
+
     }
 
     private void pageSelect(int position) {
@@ -154,7 +160,7 @@ public class BannerView extends RelativeLayout {
             // 6.3设置广告描述
             String bannerDesc = mAdapter.getBannerDesc(mCurrentPosition);
             mBannerDescTv.setText(bannerDesc);
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -170,6 +176,7 @@ public class BannerView extends RelativeLayout {
     public void stopRoll() {
         mBannerVp.stopRoll();
     }
+
     /**
      * 刷新adapter
      */
@@ -207,9 +214,6 @@ public class BannerView extends RelativeLayout {
     private int dip2px(int dip) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getResources().getDisplayMetrics());
     }
-
-
-
 
 
 }
