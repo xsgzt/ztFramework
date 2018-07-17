@@ -46,7 +46,7 @@ public abstract class BaseNavigtionBar<PARAMS extends BaseNavigtionBar.Builder.B
     /**
      * 查找控件
      */
-    protected <T extends View> T viewById(int viewID) {
+    public <T extends View> T viewById(int viewID) {
         return navigationView.findViewById(viewID);
     }
 
