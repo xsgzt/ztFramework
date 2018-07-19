@@ -54,10 +54,23 @@ public class WrapEmptyRecyclerView extends FrameLayout {
         addView(view);
 
         mEmptyView = LayoutInflater.from(context).inflate(mResourceLayoutId, this, false);
+
+
         mEmptyView.setVisibility(INVISIBLE);
         addView(mEmptyView);
     }
 
+    /**
+     * 查找空页面的空件
+     *
+     * @param viewId
+     * @param <T>
+     * @return
+     */
+
+    public <T> T getEmptyViewById(int viewId) {
+        return (T) mEmptyView.findViewById(viewId);
+    }
 
     /**
      * 靜態代理
